@@ -1,5 +1,6 @@
 ﻿using EarTrumpet.UI.Helpers;
 using EarTrumpet.UI.ViewModels;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -25,6 +26,8 @@ namespace EarTrumpet.UI.Views
             DeviceListItem.PreviewKeyDown += OnPreviewKeyDown;
             DeviceListItem.PreviewMouseRightButtonUp += (_, __) => OpenPopup();
         }
+
+        public void ApplyStartupFocus() => DeviceListItem.Focus();
 
         private void OnPreviewKeyDown(object sender, KeyEventArgs e)
         {

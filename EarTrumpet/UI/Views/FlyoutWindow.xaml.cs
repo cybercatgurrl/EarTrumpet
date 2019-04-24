@@ -8,6 +8,7 @@ using EarTrumpet.UI.ViewModels;
 using System;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace EarTrumpet.UI.Views
@@ -165,7 +166,13 @@ namespace EarTrumpet.UI.Views
                     UpdateLayout();
                     DevicesList.Focus();
 
-                    WindowAnimationLibrary.BeginFlyoutEntranceAnimation(this, () => _viewModel.ChangeState(FlyoutViewModel.ViewState.Open));
+                    WindowAnimationLibrary.BeginFlyoutEntranceAnimation(this, () =>
+                    {
+                        // If we have devices, apply focus to the first one (for typing left/right, etc.)
+                        DevicesList.FindVisualChild<DeviceView>()?.ApplyStartupFocus();
+
+                        _viewModel.ChangeState(FlyoutViewModel.ViewState.Open);
+                    });
                     break;
 
                 case FlyoutViewModel.ViewState.Closing_Stage1:
